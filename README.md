@@ -76,17 +76,16 @@ streamlit run app.py
 
 **requirements.txt:**
 ```
-pandas>=1.5.0
-numpy>=1.23.0
-scikit-learn>=1.2.0
-xgboost>=1.7.0
-imbalanced-learn>=0.10.0
-matplotlib>=3.6.0
-seaborn>=0.12.0
-plotly>=5.13.0
-joblib>=1.2.0
-streamlit>=1.20.0
-jupyter>=1.0.0
+imbalanced-learn
+joblib
+matplotlib
+numpy
+pandas
+plotly
+scikit-learn
+seaborn
+streamlit
+xgboost
 ```
 
 ---
