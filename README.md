@@ -210,4 +210,3 @@ Proyek ini berhasil membangun sistem prediksi dropout mahasiswa untuk Jaya Jaya 
 - **Action Item 4 — Kebijakan Khusus untuk Mahasiswa Non-Tradisional:** Mahasiswa yang mendaftar di usia lebih tua (>25 tahun) memiliki risiko dropout lebih tinggi. Institusi perlu mengembangkan layanan khusus seperti jadwal kuliah yang lebih fleksibel, konseling karir, dan dukungan keseimbangan kerja-studi untuk kelompok ini.
 
 - **Action Item 5 — Monitoring Berbasis Jurusan:** Dashboard menunjukkan variasi dropout rate yang signifikan antar jurusan. Institusi perlu melakukan audit kurikulum dan beban studi secara khusus pada jurusan-jurusan dengan dropout rate tertinggi, kemudian merancang program dukungan yang spesifik per jurusan.
->>>>>>> 4c5fd54 (Initial commit - proyek akhir data science)
