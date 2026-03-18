@@ -12,7 +12,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ── Blue Palette ─────────────────────────────────
+# ── Palettes ──────────────────────────────────────────────────────────────────
 BLUE = {
     "darkest":  "#0a2342",
     "dark":     "#1a3a6b",
@@ -23,80 +23,132 @@ BLUE = {
     "lightest": "#eff6ff",
 }
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+DARK = {
+    "bg_app":       "#0E1117",
+    "bg_card":      "#1e293b",
+    "bg_sidebar":   "#1e293b",
+    "bg_warn":      "#2d1b1b",
+    "bg_caution":   "#1a2744",
+    "border":       "#334155",
+    "text_primary": "#e2e8f0",
+    "text_muted":   "#94a3b8",
+    "text_accent":  "#93c5fd",
+    "shadow":       "rgba(0,0,0,0.4)",
+}
+
+# Shorthand — WAJIB ada agar tidak pakai escaped quote di f-string
+C_MUTED   = DARK["text_muted"]
+C_PRIMARY = DARK["text_primary"]
+C_APP     = DARK["bg_app"]
+C_CARD    = DARK["bg_card"]
+C_BORDER  = DARK["border"]
+C_ACCENT  = DARK["text_accent"]
+C_WARN    = DARK["bg_warn"]
+C_CAUTION = DARK["bg_caution"]
+C_SHADOW  = DARK["shadow"]
+C_LIGHT   = BLUE["light"]
+C_LIGHTER = BLUE["lighter"]
+C_MID     = BLUE["mid"]
+C_BASE    = BLUE["base"]
+C_DARK    = BLUE["dark"]
+C_DARKEST = BLUE["darkest"]
+
+# ── Custom CSS (Dark Mode) ────────────────────────────────────────────────────
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 html, body, [class*="css"] {{ font-family: 'Plus Jakarta Sans', sans-serif; }}
-.stApp {{ background: {BLUE["lightest"]}; }}
 
+.stApp {{ background: {C_APP} !important; }}
+.main .block-container {{ background: {C_APP} !important; }}
+
+/* ── Header ── */
 .main-header {{
-    background: linear-gradient(135deg, {BLUE["darkest"]} 0%, {BLUE["dark"]} 50%, {BLUE["mid"]} 100%);
-    border-radius: 16px; padding: 32px 40px; margin-bottom: 28px; color: white; text-align: center;
+    background: linear-gradient(135deg, {C_DARKEST} 0%, {C_DARK} 50%, {C_MID} 100%);
+    border-radius: 16px; padding: 32px 40px; margin-bottom: 28px;
+    color: white; text-align: center;
 }}
 .main-header h1 {{ font-size: 2rem; font-weight: 800; margin: 0 0 6px 0; }}
 .main-header p  {{ font-size: 0.95rem; opacity: 0.8; margin: 0; }}
 
+/* ── Section Header ── */
 .section-header {{
-    font-size: 0.88rem; font-weight: 700; color: {BLUE["darkest"]};
-    border-left: 4px solid {BLUE["mid"]}; padding-left: 10px;
+    font-size: 0.88rem; font-weight: 700; color: {C_ACCENT};
+    border-left: 4px solid {C_MID}; padding-left: 10px;
     margin-top: 1.2rem; margin-bottom: 0.7rem; text-transform: uppercase;
     letter-spacing: 0.5px;
 }}
 
+/* ── Result Box ── */
 .result-box {{
     border-radius: 14px; padding: 24px 28px; text-align: center;
     font-size: 1.6rem; font-weight: 800; margin-top: 1rem; color: white;
 }}
-.result-dropout  {{ background: linear-gradient(135deg, {BLUE["darkest"]}, {BLUE["dark"]}); }}
-.result-graduate {{ background: linear-gradient(135deg, {BLUE["mid"]}, {BLUE["base"]}); }}
-.result-enrolled {{ background: linear-gradient(135deg, {BLUE["base"]}, {BLUE["light"]}); color: {BLUE["darkest"]}; }}
+.result-dropout  {{ background: linear-gradient(135deg, {C_DARKEST}, {C_DARK}); }}
+.result-graduate {{ background: linear-gradient(135deg, {C_MID}, {C_BASE}); }}
+.result-enrolled {{ background: linear-gradient(135deg, {C_BASE}, {C_LIGHT}); color: {C_DARKEST}; }}
 
+/* ── Probability Card ── */
 .prob-card {{
-    background: white; border-radius: 12px; padding: 16px;
-    text-align: center; box-shadow: 0 2px 10px rgba(37,99,235,0.08);
-    border-top: 4px solid {BLUE["base"]};
+    background: {C_CARD}; border-radius: 12px; padding: 16px;
+    text-align: center; box-shadow: 0 2px 10px {C_SHADOW};
+    border-top: 4px solid {C_BASE};
 }}
-.prob-card.dropout  {{ border-top-color: {BLUE["darkest"]}; }}
-.prob-card.graduate {{ border-top-color: {BLUE["base"]}; }}
-.prob-card.enrolled {{ border-top-color: {BLUE["light"]}; }}
-.prob-value {{ font-size: 2rem; font-weight: 800; color: {BLUE["darkest"]}; }}
-.prob-label {{ font-size: 0.78rem; color: #64748b; font-weight: 600;
+.prob-card.dropout  {{ border-top-color: {C_DARKEST}; }}
+.prob-card.graduate {{ border-top-color: {C_BASE}; }}
+.prob-card.enrolled {{ border-top-color: {C_LIGHT}; }}
+.prob-value {{ font-size: 2rem; font-weight: 800; color: {C_PRIMARY}; }}
+.prob-label {{ font-size: 0.78rem; color: {C_MUTED}; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }}
 
+/* ── Insight Card ── */
 .insight-card {{
-    background: white; border-radius: 12px; padding: 18px 20px;
-    box-shadow: 0 2px 10px rgba(37,99,235,0.07); margin-top: 16px;
-    border-left: 5px solid {BLUE["mid"]};
+    background: {C_CARD}; border-radius: 12px; padding: 18px 20px;
+    box-shadow: 0 2px 10px {C_SHADOW}; margin-top: 16px;
+    border-left: 5px solid {C_MID};
 }}
-.insight-card h4 {{ color: {BLUE["darkest"]}; font-size: 0.9rem;
+.insight-card h4 {{ color: {C_PRIMARY}; font-size: 0.9rem;
     font-weight: 700; margin: 0 0 12px 0; }}
 
+/* ── Feature Row ── */
 .feature-row {{
     display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 0; border-bottom: 1px solid {BLUE["lightest"]};
+    padding: 8px 0; border-bottom: 1px solid {C_BORDER};
     font-size: 0.85rem;
 }}
 .feature-row:last-child {{ border-bottom: none; }}
-.feature-name  {{ color: #64748b; }}
-.feature-value {{ font-weight: 700; color: {BLUE["darkest"]}; }}
-.feature-value.bad  {{ color: #dc2626; }}
-.feature-value.good {{ color: {BLUE["mid"]}; }}
+.feature-name  {{ color: {C_MUTED}; }}
+.feature-value {{ font-weight: 700; color: {C_PRIMARY}; }}
+.feature-value.bad  {{ color: #f87171; }}
+.feature-value.good {{ color: #4ade80; }}
 
+/* ── Info Box ── */
 .info-box {{
-    background: {BLUE["lightest"]}; border-left: 4px solid {BLUE["mid"]};
+    background: {C_CAUTION}; border-left: 4px solid {C_MID};
     padding: 10px 14px; border-radius: 0 8px 8px 0;
-    margin-bottom: 16px; font-size: 0.85rem; color: {BLUE["dark"]};
+    margin-bottom: 16px; font-size: 0.85rem; color: {C_ACCENT};
 }}
 
+/* ── Chart Card ── */
 .chart-card {{
-    background: white; border-radius: 14px; padding: 22px;
-    box-shadow: 0 2px 12px rgba(37,99,235,0.07); margin-bottom: 20px;
+    background: {C_CARD}; border-radius: 14px; padding: 22px;
+    box-shadow: 0 2px 12px {C_SHADOW}; margin-bottom: 20px;
 }}
 
+/* ── Sidebar ── */
 section[data-testid="stSidebar"] {{
-    background: white; border-right: 1px solid {BLUE["lighter"]};
+    background: {C_CARD} !important;
+    border-right: 1px solid {C_BORDER};
 }}
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] .stMarkdown {{
+    color: {C_PRIMARY} !important;
+}}
+
+/* ── Headings ── */
+h3, h4 {{ color: {C_PRIMARY} !important; }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -157,7 +209,7 @@ if load_error:
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown(f"## 📋 Panduan")
+    st.markdown("## 📋 Panduan")
     st.markdown("""
     1. Isi **data utama** mahasiswa di form
     2. Expand **Data Tambahan** jika perlu
@@ -166,7 +218,7 @@ with st.sidebar:
     """)
     st.markdown("---")
     st.markdown("#### Status Prediksi")
-    st.markdown(f"""
+    st.markdown("""
     - 🔴 **Dropout** — Berisiko keluar
     - 🔵 **Enrolled** — Masih aktif
     - 🟢 **Graduate** — Diprediksi lulus
@@ -174,7 +226,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown("#### Faktor Paling Berpengaruh")
     st.markdown(f"""
-    <div style='font-size:0.82rem;color:{BLUE["dark"]}'>
+    <div style='font-size:0.82rem;color:{C_ACCENT}'>
     1. Approval Rate Sem 2<br>
     2. SPP Tepat Waktu<br>
     3. Unit Disetujui Sem 2<br>
@@ -241,20 +293,24 @@ with col2:
 # ── Kolom 3: Data Akademik Lanjutan ──────────────────────────────────────────
 with col3:
     st.markdown('<div class="section-header">🎓 Data Akademik</div>', unsafe_allow_html=True)
-    course = st.selectbox("Program Studi ⭐", [33,171,8014,9003,9070,9085,9119,9130,
-        9147,9238,9254,9500,9556,9670,9773,9853,9991],
-        format_func=lambda x: {33:"Biofuel Production Tech",171:"Animation & Multimedia",
-        8014:"Social Service (Evening)",9003:"Agronomy",9070:"Communication Design",
-        9085:"Veterinary Nursing",9119:"Informatics Engineering",9130:"Equinculture",
-        9147:"Management",9238:"Social Service",9254:"Tourism",9500:"Nursing",
-        9556:"Oral Hygiene",9670:"Advertising & Marketing",9773:"Journalism & Comm.",
-        9853:"Basic Education",9991:"Management (Evening)"}.get(x, str(x)),
+    course = st.selectbox("Program Studi ⭐",
+        [33,171,8014,9003,9070,9085,9119,9130,9147,9238,9254,9500,9556,9670,9773,9853,9991],
+        format_func=lambda x: {
+            33:"Biofuel Production Tech", 171:"Animation & Multimedia",
+            8014:"Social Service (Evening)", 9003:"Agronomy",
+            9070:"Communication Design", 9085:"Veterinary Nursing",
+            9119:"Informatics Engineering", 9130:"Equinculture",
+            9147:"Management", 9238:"Social Service", 9254:"Tourism",
+            9500:"Nursing", 9556:"Oral Hygiene", 9670:"Advertising & Marketing",
+            9773:"Journalism & Comm.", 9853:"Basic Education",
+            9991:"Management (Evening)"
+        }.get(x, str(x)),
         help="Fitur #10 terpenting")
     daytime_evening = st.selectbox("Waktu Kuliah", [1, 0],
         format_func=lambda x: "Pagi/Siang" if x==1 else "Malam")
     admission_grade = st.slider("Nilai Masuk (0-200)", 0.0, 200.0, 130.0, step=0.5)
-    previous_qualification_grade = st.slider("Nilai Kualifikasi Sebelumnya (0-200)",
-        0.0, 200.0, 130.0, step=0.5)
+    previous_qualification_grade = st.slider(
+        "Nilai Kualifikasi Sebelumnya (0-200)", 0.0, 200.0, 130.0, step=0.5)
     application_order = st.slider("Urutan Pilihan Prodi (0=Pilihan 1)", 0, 9, 1)
     educational_special_needs = st.selectbox("Kebutuhan Khusus Pendidikan", [0,1],
         format_func=lambda x: "Ya" if x==1 else "Tidak")
@@ -264,42 +320,60 @@ with col3:
         st.caption("Fitur-fitur ini kurang berpengaruh pada prediksi. Nilai default sudah representatif.")
         application_mode = st.selectbox("Jalur Pendaftaran",
             [1,2,5,7,10,15,16,17,18,26,27,39,42,43,44,51,53,57],
-            format_func=lambda x: {1:"1st Phase–General",2:"Ordinance 612/93",
-            5:"1st Phase–Azores",7:"Other Higher Courses",10:"Ordinance 854-B/99",
-            15:"International (Bachelor)",16:"1st Phase–Madeira",17:"2nd Phase–General",
-            18:"3rd Phase–General",26:"Other Plan",27:"Other Institution",
-            39:"Over 23 Years Old",42:"Transfer",43:"Change of Course",
-            44:"Tech Specialization",51:"Change Inst./Course",
-            53:"Short Cycle Diploma",57:"International Change"}.get(x, str(x)))
+            format_func=lambda x: {
+                1:"1st Phase–General", 2:"Ordinance 612/93",
+                5:"1st Phase–Azores", 7:"Other Higher Courses",
+                10:"Ordinance 854-B/99", 15:"International (Bachelor)",
+                16:"1st Phase–Madeira", 17:"2nd Phase–General",
+                18:"3rd Phase–General", 26:"Other Plan",
+                27:"Other Institution", 39:"Over 23 Years Old",
+                42:"Transfer", 43:"Change of Course",
+                44:"Tech Specialization", 51:"Change Inst./Course",
+                53:"Short Cycle Diploma", 57:"International Change"
+            }.get(x, str(x)))
         previous_qualification = st.selectbox("Kualifikasi Sebelumnya",
             [1,2,3,4,5,6,9,10,12,14,15,19,38,39,40,42,43],
-            format_func=lambda x: {1:"Secondary Ed",2:"Bachelor's",3:"Degree",
-            4:"Master's",5:"Doctorate",6:"Freq Higher Ed",9:"12th–Not Done",
-            10:"11th–Not Done",12:"Other 11th",14:"10th Year",15:"10th–Not Done",
-            19:"Basic Ed 3rd Cycle",38:"Basic Ed 2nd Cycle",39:"Tech Specialization",
-            40:"Higher Ed 1st Cycle",42:"Prof. Higher Tech",43:"Higher Ed Master"}.get(x, str(x)))
+            format_func=lambda x: {
+                1:"Secondary Ed", 2:"Bachelor's", 3:"Degree",
+                4:"Master's", 5:"Doctorate", 6:"Freq Higher Ed",
+                9:"12th–Not Done", 10:"11th–Not Done", 12:"Other 11th",
+                14:"10th Year", 15:"10th–Not Done", 19:"Basic Ed 3rd Cycle",
+                38:"Basic Ed 2nd Cycle", 39:"Tech Specialization",
+                40:"Higher Ed 1st Cycle", 42:"Prof. Higher Tech",
+                43:"Higher Ed Master"
+            }.get(x, str(x)))
         nationality = st.selectbox("Kewarganegaraan",
             [1,2,6,11,13,14,41,62,100,101,103,105,108,109],
-            format_func=lambda x: {1:"Portugal",2:"Jerman",6:"Spanyol",11:"Italia",
-            13:"Belanda",14:"Inggris",41:"Brasil",62:"Romania",100:"Moldova",
-            101:"Meksiko",103:"Ukraina",105:"Rusia",108:"Kuba",109:"Kolombia"}.get(x, str(x)))
+            format_func=lambda x: {
+                1:"Portugal", 2:"Jerman", 6:"Spanyol", 11:"Italia",
+                13:"Belanda", 14:"Inggris", 41:"Brasil", 62:"Romania",
+                100:"Moldova", 101:"Meksiko", 103:"Ukraina",
+                105:"Rusia", 108:"Kuba", 109:"Kolombia"
+            }.get(x, str(x)))
         qual_opts = [1,2,3,4,5,6,9,10,11,12,14,18,19,22,26,27,29,30,34,35,36,37,38,39,40,41,42,43,44]
-        qual_fmt  = lambda x: {1:"Secondary Ed",2:"Bachelor's",3:"Degree",4:"Master's",
-            5:"Doctorate",6:"Freq Higher Ed",9:"12th–Not Done",10:"11th–Not Done",
-            11:"7th Year",12:"Other 11th",14:"10th Year",18:"General Commerce",
-            19:"Basic 3rd Cycle",22:"Tech-Professional",26:"7th Year Schooling",
-            27:"2nd Cycle Basic",29:"9th Year–Not Done",30:"8th Year",
-            34:"Unknown",35:"Can't Read/Write",36:"Can Read–No 4th Year",
-            37:"Basic 1st Cycle",38:"Basic 2nd Cycle",39:"Tech Specialization",
-            40:"Higher Ed 1st Cycle",41:"Higher Specialized",
-            42:"Prof. Higher Tech",43:"Higher Ed 2nd Cycle",44:"Higher Ed 3rd Cycle"}.get(x, str(x))
+        qual_fmt  = lambda x: {
+            1:"Secondary Ed", 2:"Bachelor's", 3:"Degree", 4:"Master's",
+            5:"Doctorate", 6:"Freq Higher Ed", 9:"12th–Not Done",
+            10:"11th–Not Done", 11:"7th Year", 12:"Other 11th",
+            14:"10th Year", 18:"General Commerce", 19:"Basic 3rd Cycle",
+            22:"Tech-Professional", 26:"7th Year Schooling",
+            27:"2nd Cycle Basic", 29:"9th Year–Not Done", 30:"8th Year",
+            34:"Unknown", 35:"Can't Read/Write", 36:"Can Read–No 4th Year",
+            37:"Basic 1st Cycle", 38:"Basic 2nd Cycle",
+            39:"Tech Specialization", 40:"Higher Ed 1st Cycle",
+            41:"Higher Specialized", 42:"Prof. Higher Tech",
+            43:"Higher Ed 2nd Cycle", 44:"Higher Ed 3rd Cycle"
+        }.get(x, str(x))
         mothers_qualification = st.selectbox("Pendidikan Ibu", qual_opts, format_func=qual_fmt)
         fathers_qualification = st.selectbox("Pendidikan Ayah", qual_opts, format_func=qual_fmt)
         occ_opts = list(range(0,10))
-        occ_fmt  = lambda x: {0:"Student",1:"Legislative/Director",2:"Intellectual/Scientific",
-            3:"Intermediate Technician",4:"Administrative",5:"Services/Sellers",
-            6:"Agriculture/Fisheries",7:"Industry/Construction",
-            8:"Machine Operators",9:"Unskilled Workers"}.get(x, str(x))
+        occ_fmt  = lambda x: {
+            0:"Student", 1:"Legislative/Director",
+            2:"Intellectual/Scientific", 3:"Intermediate Technician",
+            4:"Administrative", 5:"Services/Sellers",
+            6:"Agriculture/Fisheries", 7:"Industry/Construction",
+            8:"Machine Operators", 9:"Unskilled Workers"
+        }.get(x, str(x))
         mothers_occupation = st.selectbox("Pekerjaan Ibu", occ_opts, format_func=occ_fmt)
         fathers_occupation = st.selectbox("Pekerjaan Ayah", occ_opts, format_func=occ_fmt)
         unemployment_rate = st.slider("Unemployment Rate (%)", 0.0, 25.0, 10.8, step=0.1)
@@ -375,9 +449,12 @@ if predict_btn:
 
     # ── Hasil Utama ───────────────────────────────────────────────────────────
     with res_col:
-        css_class = {"Dropout": "result-dropout", "Graduate": "result-graduate",
-                     "Enrolled": "result-enrolled"}.get(pred_label, "result-enrolled")
-        icon_map  = {"Dropout": "🔴", "Graduate": "🟢", "Enrolled": "🔵"}
+        css_class = {
+            "Dropout": "result-dropout",
+            "Graduate": "result-graduate",
+            "Enrolled": "result-enrolled"
+        }.get(pred_label, "result-enrolled")
+        icon_map = {"Dropout": "🔴", "Graduate": "🟢", "Enrolled": "🔵"}
         st.markdown(f"""
         <div class="result-box {css_class}">
             {icon_map.get(pred_label, "")} Prediksi: <b>{pred_label}</b>
@@ -400,7 +477,7 @@ if predict_btn:
         for pc, cls, prob in zip(prob_cols, classes, proba):
             with pc:
                 st.markdown(f"""
-                <div class="prob-card {css_map.get(cls,'')}">
+                <div class="prob-card {css_map.get(cls, '')}">
                     <div class="prob-value">{prob*100:.1f}%</div>
                     <div class="prob-label">{cls}</div>
                 </div>""", unsafe_allow_html=True)
@@ -418,36 +495,22 @@ if predict_btn:
                 <span class="feature-value {cls}">{value}</span>
             </div>"""
 
-        # Approval Rate Sem2 — fitur #1
-        ar2_bad = ar2 < 0.5
-        rows = fmt_row("Approval Rate Sem 2 🥇", f"{ar2:.2f}", ar2_bad)
-
-        # Tuition — fitur #2
-        tuit_bad = tuition_up_to_date == 0
-        rows += fmt_row("SPP Tepat Waktu ⭐", "Tidak ❌" if tuit_bad else "Ya ✅", tuit_bad)
-
-        # Unit Disetujui Sem2 — fitur #3
-        cu2_bad = cu2_approved == 0
-        rows += fmt_row("Unit Disetujui Sem 2 ⭐", str(cu2_approved), cu2_bad)
-
-        # Unit Disetujui Sem1 — fitur #4
-        cu1_bad = cu1_approved == 0
-        rows += fmt_row("Unit Disetujui Sem 1 ⭐", str(cu1_approved), cu1_bad)
-
-        # Beasiswa — fitur #5
-        sch_bad = scholarship_holder == 0
-        rows += fmt_row("Penerima Beasiswa ⭐", "Tidak" if sch_bad else "Ya ✅", sch_bad)
-
-        # Debtor — fitur #6
-        deb_bad = debtor == 1
-        rows += fmt_row("Status Debitur ⭐", "Ya ❌" if deb_bad else "Tidak ✅", deb_bad)
-
-        # Approval Rate Sem1 — fitur #7
-        ar1_bad = ar1 < 0.5
-        rows += fmt_row("Approval Rate Sem 1 ⭐", f"{ar1:.2f}", ar1_bad)
-
-        # Grade trend
+        ar2_bad   = ar2 < 0.5
+        tuit_bad  = tuition_up_to_date == 0
+        cu2_bad   = cu2_approved == 0
+        cu1_bad   = cu1_approved == 0
+        sch_bad   = scholarship_holder == 0
+        deb_bad   = debtor == 1
+        ar1_bad   = ar1 < 0.5
         trend_bad = trend < 0
+
+        rows  = fmt_row("Approval Rate Sem 2 🥇", f"{ar2:.2f}", ar2_bad)
+        rows += fmt_row("SPP Tepat Waktu ⭐", "Tidak ❌" if tuit_bad else "Ya ✅", tuit_bad)
+        rows += fmt_row("Unit Disetujui Sem 2 ⭐", str(cu2_approved), cu2_bad)
+        rows += fmt_row("Unit Disetujui Sem 1 ⭐", str(cu1_approved), cu1_bad)
+        rows += fmt_row("Penerima Beasiswa ⭐", "Tidak" if sch_bad else "Ya ✅", sch_bad)
+        rows += fmt_row("Status Debitur ⭐", "Ya ❌" if deb_bad else "Tidak ✅", deb_bad)
+        rows += fmt_row("Approval Rate Sem 1 ⭐", f"{ar1:.2f}", ar1_bad)
         rows += fmt_row("Tren Nilai (Sem2−Sem1)", f"{trend:+.1f}", trend_bad)
 
         st.markdown(rows, unsafe_allow_html=True)
@@ -465,13 +528,17 @@ if predict_btn:
     # ── Detail Expander ───────────────────────────────────────────────────────
     with st.expander("🔧 Detail Fitur Engineering (kalkulasi otomatis)"):
         eng_data = {
-            "Fitur": ["approval_rate_sem1","approval_rate_sem2","total_approved",
-                      "avg_grade_both_sem","is_academically_active","grade_trend"],
-            "Nilai": [f"{ar1:.3f}", f"{ar2:.3f}",
-                      f"{input_df['total_approved'].values[0]:.0f}",
-                      f"{grade:.2f}",
-                      f"{input_df['is_academically_active'].values[0]:.0f}",
-                      f"{trend:.2f}"],
+            "Fitur": [
+                "approval_rate_sem1", "approval_rate_sem2", "total_approved",
+                "avg_grade_both_sem", "is_academically_active", "grade_trend"
+            ],
+            "Nilai": [
+                f"{ar1:.3f}", f"{ar2:.3f}",
+                f"{input_df['total_approved'].values[0]:.0f}",
+                f"{grade:.2f}",
+                f"{input_df['is_academically_active'].values[0]:.0f}",
+                f"{trend:.2f}"
+            ],
             "Keterangan": [
                 "Rasio lulus/ambil sem 1",
                 "Rasio lulus/ambil sem 2 (fitur #1)",
@@ -489,8 +556,8 @@ if predict_btn:
 # ── Footer ────────────────────────────────────────────────────────────────────
 st.markdown("---")
 st.markdown(f"""
-<div style='text-align:center; color:#94a3b8; font-size:0.78rem; padding: 8px 0 20px;'>
+<div style='text-align:center; color:{C_MUTED}; font-size:0.78rem; padding: 8px 0 20px;'>
     🎓 Jaya Jaya Institut — Student Dropout Prediction System<br>
-    Dibangun dengan XGBoost + SMOTE & Streamlit
+    Dibangun dengan XGBoost + SMOTE &amp; Streamlit
 </div>
 """, unsafe_allow_html=True)
