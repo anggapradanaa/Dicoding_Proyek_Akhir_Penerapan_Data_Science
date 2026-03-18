@@ -170,7 +170,7 @@ Aplikasi akan otomatis terbuka di browser pada alamat: `http://localhost:8501`
 | **Analisis Faktor Risiko** | Panel khusus menampilkan 8 indikator risiko berdasarkan feature importance — merah jika buruk, biru jika baik — beserta ringkasan "n/8 indikator risiko aktif" |
 | **Detail Engineering** | Expander menampilkan nilai 6 fitur hasil feature engineering beserta keterangannya |
 
-> 🔗 **Link Prototype Online:** *(akan ditambahkan setelah deployment ke Streamlit Community Cloud)*
+> 🔗 **Link Prototype Online:** https://dicoding-proyek-akhir-app.streamlit.app/
 
 ---
 
