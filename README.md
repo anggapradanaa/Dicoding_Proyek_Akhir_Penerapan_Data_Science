@@ -126,7 +126,7 @@ Sistem peringatan dini menggunakan **model XGBoost** yang sudah dilatih:
 
 Dashboard juga dilengkapi **sidebar filter global** (Gender & Jurusan) yang berlaku untuk semua tab, serta **insight dinamis** di setiap tab yang menyesuaikan dengan filter yang dipilih.
 
-> 🔗 **Link Dashboard:** *(akan ditambahkan setelah deployment ke Streamlit Community Cloud)*
+> 🔗 **Link Dashboard:** https://dicoding-proyek-akhir-ds-dashboard.streamlit.app/
 
 ---
 
