@@ -25,6 +25,22 @@ BLUE = {
     "lightest": "#eff6ff",
 }
 
+# Dark mode card/UI colors
+DARK = {
+    "bg_app":       "#0E1117",
+    "bg_card":      "#1e293b",
+    "bg_sidebar":   "#1e293b",
+    "bg_warn":      "#2d1b1b",
+    "bg_caution":   "#1a2744",
+    "bg_safe":      "#0f2a1a",
+    "border":       "#334155",
+    "text_primary": "#e2e8f0",
+    "text_muted":   "#94a3b8",
+    "text_accent":  "#93c5fd",
+    "grid":         "#1e3a5f",
+    "shadow":       "rgba(0,0,0,0.4)",
+}
+
 STATUS_COLOR = {
     "Dropout":  BLUE["dark"],
     "Enrolled": BLUE["base"],
@@ -40,69 +56,146 @@ COURSE_MAP = {
     9773:"Social Service", 9853:"Tourism", 9991:"Nursing",
 }
 
-# ── Custom CSS ────────────────────────────────────────────────────────────────
+# ── Custom CSS (Dark Mode Hardcoded) ─────────────────────────────────────────
 st.markdown(f"""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 html, body, [class*="css"] {{ font-family: 'Plus Jakarta Sans', sans-serif; }}
-.stApp {{ background: {BLUE["lightest"]}; }}
 
+/* ── App Background ── */
+.stApp {{
+    background: {DARK["bg_app"]} !important;
+}}
+
+/* ── Main content area ── */
+.main .block-container {{
+    background: {DARK["bg_app"]} !important;
+}}
+
+/* ── Header Banner ── */
 .main-header {{
     background: linear-gradient(135deg, {BLUE["darkest"]} 0%, {BLUE["dark"]} 50%, {BLUE["mid"]} 100%);
-    border-radius: 16px; padding: 32px 40px; margin-bottom: 28px; color: white;
+    border-radius: 16px;
+    padding: 32px 40px;
+    margin-bottom: 28px;
+    color: white;
 }}
-.main-header h1 {{ font-size: 2rem; font-weight: 800; margin: 0 0 6px 0; letter-spacing: -0.5px; }}
-.main-header p  {{ font-size: 0.95rem; opacity: 0.8; margin: 0; }}
+.main-header h1 {{
+    font-size: 2rem; font-weight: 800;
+    margin: 0 0 6px 0; letter-spacing: -0.5px;
+}}
+.main-header p {{
+    font-size: 0.95rem; opacity: 0.8; margin: 0;
+}}
 
+/* ── Metric Cards ── */
 .metric-card {{
-    background: white; border-radius: 14px; padding: 20px 22px;
+    background: {DARK["bg_card"]};
+    border-radius: 14px;
+    padding: 20px 22px;
     border-left: 5px solid {BLUE["base"]};
-    box-shadow: 0 2px 12px rgba(37,99,235,0.08); height: 100%;
+    box-shadow: 0 2px 12px {DARK["shadow"]};
+    height: 100%;
 }}
-.metric-card.dropout  {{ border-left-color: {BLUE["darkest"]}; }}
+.metric-card.dropout  {{ border-left-color: {BLUE["light"]}; }}
 .metric-card.enrolled {{ border-left-color: {BLUE["base"]}; }}
-.metric-card.graduate {{ border-left-color: {BLUE["light"]}; }}
-.metric-card.warning  {{ border-left-color: #dc2626; background: #fff5f5; }}
-.metric-card.caution  {{ border-left-color: {BLUE["mid"]}; background: {BLUE["lightest"]}; }}
-.metric-card.safe     {{ border-left-color: {BLUE["light"]}; }}
-.metric-label {{ font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.8px; color: #64748b; margin-bottom: 6px; }}
-.metric-value {{ font-size: 2rem; font-weight: 800; color: {BLUE["darkest"]}; line-height: 1; }}
-.metric-pct   {{ font-size: 0.82rem; color: {BLUE["mid"]}; font-weight: 600; margin-top: 4px; }}
+.metric-card.graduate {{ border-left-color: {BLUE["lighter"]}; }}
+.metric-card.warning  {{ border-left-color: #f87171; background: {DARK["bg_warn"]}; }}
+.metric-card.caution  {{ border-left-color: {BLUE["mid"]}; background: {DARK["bg_caution"]}; }}
+.metric-card.safe     {{ border-left-color: #4ade80; background: {DARK["bg_safe"]}; }}
 
-.chart-card {{
-    background: white; border-radius: 14px; padding: 22px;
-    box-shadow: 0 2px 12px rgba(37,99,235,0.07); margin-bottom: 20px;
+.metric-label {{
+    font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.8px;
+    color: {DARK["text_muted"]}; margin-bottom: 6px;
 }}
-.chart-title    {{ font-size: 1rem; font-weight: 700; color: {BLUE["darkest"]}; margin-bottom: 3px; }}
-.chart-subtitle {{ font-size: 0.8rem; color: #94a3b8; margin-bottom: 14px; }}
+.metric-value {{
+    font-size: 2rem; font-weight: 800;
+    color: {DARK["text_primary"]}; line-height: 1;
+}}
+.metric-pct {{
+    font-size: 0.82rem; color: {BLUE["light"]};
+    font-weight: 600; margin-top: 4px;
+}}
 
+/* ── Chart Cards ── */
+.chart-card {{
+    background: {DARK["bg_card"]};
+    border-radius: 14px; padding: 22px;
+    box-shadow: 0 2px 12px {DARK["shadow"]};
+    margin-bottom: 20px;
+}}
+.chart-title {{
+    font-size: 1rem; font-weight: 700;
+    color: {DARK["text_primary"]}; margin-bottom: 3px;
+}}
+.chart-subtitle {{
+    font-size: 0.8rem; color: {DARK["text_muted"]}; margin-bottom: 14px;
+}}
+
+/* ── Tabs ── */
 .stTabs [data-baseweb="tab-list"] {{
-    gap: 8px; background: white; padding: 8px; border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(37,99,235,0.08); margin-bottom: 24px;
+    gap: 8px;
+    background: {DARK["bg_card"]};
+    padding: 8px; border-radius: 12px;
+    box-shadow: 0 2px 8px {DARK["shadow"]};
+    margin-bottom: 24px;
 }}
 .stTabs [data-baseweb="tab"] {{
-    border-radius: 8px; padding: 10px 20px; font-weight: 600;
-    font-size: 0.86rem; color: #64748b; border: none !important;
+    border-radius: 8px; padding: 10px 20px;
+    font-weight: 600; font-size: 0.86rem;
+    color: {DARK["text_muted"]}; border: none !important;
+    background: transparent !important;
 }}
-.stTabs [aria-selected="true"] {{ background: {BLUE["mid"]} !important; color: white !important; }}
+.stTabs [aria-selected="true"] {{
+    background: {BLUE["mid"]} !important;
+    color: white !important;
+}}
 
+/* ── Insight Box ── */
 .insight-box {{
-    background: linear-gradient(135deg, {BLUE["lightest"]}, {BLUE["lighter"]});
-    border: 1px solid {BLUE["lighter"]}; border-radius: 10px;
-    padding: 14px 18px; font-size: 0.84rem; color: {BLUE["dark"]}; margin-top: 12px;
+    background: {DARK["bg_card"]};
+    border: 1px solid {DARK["border"]};
+    border-left: 4px solid {BLUE["base"]};
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-size: 0.84rem;
+    color: {DARK["text_accent"]};
+    margin-top: 12px;
 }}
-.insight-box strong {{ color: {BLUE["darkest"]}; }}
+.insight-box strong {{
+    color: {DARK["text_primary"]};
+}}
 
+/* ── Section Divider ── */
 .section-divider {{
-    height: 1px; background: linear-gradient(90deg, {BLUE["lighter"]}, transparent);
+    height: 1px;
+    background: linear-gradient(90deg, {DARK["border"]}, transparent);
     margin: 24px 0;
 }}
 
+/* ── Sidebar ── */
 section[data-testid="stSidebar"] {{
-    background: white;
-    border-right: 1px solid {BLUE["lighter"]};
+    background: {DARK["bg_sidebar"]} !important;
+    border-right: 1px solid {DARK["border"]};
 }}
+section[data-testid="stSidebar"] .stMarkdown,
+section[data-testid="stSidebar"] label,
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] span {{
+    color: {DARK["text_primary"]} !important;
+}}
+
+/* ── Selectbox & Widgets ── */
+.stSelectbox > div > div {{
+    background: {DARK["bg_app"]} !important;
+    border-color: {DARK["border"]} !important;
+    color: {DARK["text_primary"]} !important;
+}}
+
+/* ── Headings inside tabs ── */
+h4 {{ color: {DARK["text_primary"]} !important; }}
+p  {{ color: {DARK["text_muted"]}; }}
 </style>
 """, unsafe_allow_html=True)
 
@@ -116,17 +209,38 @@ def tidy_fig(fig, height=360, legend=True):
     fig.update_layout(
         height=height,
         margin=dict(l=12, r=12, t=36, b=12),
-        paper_bgcolor="white", plot_bgcolor="white",
-        font=dict(family="Plus Jakarta Sans", size=12, color=BLUE["darkest"]),
-        legend=dict(orientation="h", yanchor="bottom", y=1.02,
-                    xanchor="right", x=1, font=dict(size=11)) if legend else dict(visible=False),
-        xaxis=dict(gridcolor="#f1f5f9", linecolor="#e2e8f0"),
-        yaxis=dict(gridcolor="#f1f5f9", linecolor="#e2e8f0"),
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        font=dict(family="Plus Jakarta Sans", size=12, color=DARK["text_primary"]),
+        legend=dict(
+            orientation="h", yanchor="bottom", y=1.02,
+            xanchor="right", x=1,
+            font=dict(size=11, color=DARK["text_primary"]),
+            bgcolor="rgba(0,0,0,0)",
+        ) if legend else dict(visible=False),
+        xaxis=dict(
+            gridcolor=DARK["grid"],
+            linecolor=DARK["border"],
+            tickfont=dict(color=DARK["text_muted"]),
+            title_font=dict(color=DARK["text_muted"]),
+        ),
+        yaxis=dict(
+            gridcolor=DARK["grid"],
+            linecolor=DARK["border"],
+            tickfont=dict(color=DARK["text_muted"]),
+            title_font=dict(color=DARK["text_muted"]),
+        ),
     )
     return fig
 
 STATUS_ORDER = ["Dropout", "Enrolled", "Graduate"]
 PLOT_COLORS  = [STATUS_COLOR[s] for s in STATUS_ORDER]
+
+# Shorthand untuk dipakai di f-string inline
+C_MUTED   = DARK["text_muted"]
+C_PRIMARY = DARK["text_primary"]
+C_APP     = DARK["bg_app"]
+C_LIGHT   = BLUE["light"]
 
 # ── Load Data ─────────────────────────────────────────────────────────────────
 @st.cache_data
@@ -272,19 +386,23 @@ with tab1:
         counts = df["Status"].value_counts().reindex(STATUS_ORDER)
         fig_donut = go.Figure(go.Pie(
             labels=counts.index, values=counts.values, hole=0.55,
-            marker=dict(colors=PLOT_COLORS, line=dict(color="white", width=3)),
-            textinfo="percent", textfont=dict(size=13, family="Plus Jakarta Sans"),
+            marker=dict(colors=PLOT_COLORS, line=dict(color=DARK["bg_card"], width=3)),
+            textinfo="percent", textfont=dict(size=13, family="Plus Jakarta Sans", color="white"),
             hovertemplate="<b>%{label}</b><br>%{value:,} mahasiswa<br>%{percent}<extra></extra>",
         ))
         fig_donut.update_layout(
             height=300, margin=dict(l=0, r=0, t=10, b=0),
-            paper_bgcolor="white", showlegend=True,
-            legend=dict(orientation="v", x=1.05, y=0.5,
-                        font=dict(size=12, family="Plus Jakarta Sans")),
+            paper_bgcolor="rgba(0,0,0,0)",
+            showlegend=True,
+            legend=dict(
+                orientation="v", x=1.05, y=0.5,
+                font=dict(size=12, family="Plus Jakarta Sans", color=DARK["text_primary"]),
+                bgcolor="rgba(0,0,0,0)",
+            ),
             annotations=[dict(
                 text=f"<b>{drop_rate:.1f}%</b><br>Dropout",
                 x=0.5, y=0.5,
-                font=dict(size=14, color=BLUE["darkest"], family="Plus Jakarta Sans"),
+                font=dict(size=14, color=DARK["text_primary"], family="Plus Jakarta Sans"),
                 showarrow=False,
             )],
         )
@@ -308,20 +426,31 @@ with tab1:
             orientation="h",
             marker=dict(
                 color=course_grp["dropout_rate"],
-                colorscale=[[0, BLUE["lighter"]], [0.5, BLUE["base"]], [1, BLUE["darkest"]]],
+                colorscale=[[0, BLUE["dark"]], [0.5, BLUE["base"]], [1, BLUE["light"]]],
                 showscale=False,
             ),
             text=course_grp["dropout_rate"].apply(lambda v: f"{v:.1f}%"),
             textposition="outside",
+            textfont=dict(color=DARK["text_primary"]),
             hovertemplate="<b>%{y}</b><br>Dropout Rate: %{x:.1f}%<extra></extra>",
         ))
         fig_course.update_layout(
             height=360, margin=dict(l=12, r=60, t=10, b=12),
-            paper_bgcolor="white", plot_bgcolor="white",
-            font=dict(family="Plus Jakarta Sans", size=11),
-            xaxis=dict(title="Dropout Rate (%)", gridcolor="#f1f5f9",
-                       range=[0, course_grp["dropout_rate"].max() * 1.22]),
-            yaxis=dict(tickfont=dict(size=10)),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(family="Plus Jakarta Sans", size=11, color=DARK["text_primary"]),
+            xaxis=dict(
+                title="Dropout Rate (%)",
+                gridcolor=DARK["grid"],
+                linecolor=DARK["border"],
+                tickfont=dict(color=DARK["text_muted"]),
+                title_font=dict(color=DARK["text_muted"]),
+                range=[0, course_grp["dropout_rate"].max() * 1.22],
+            ),
+            yaxis=dict(
+                tickfont=dict(size=10, color=DARK["text_muted"]),
+                linecolor=DARK["border"],
+            ),
         )
         st.plotly_chart(fig_course, use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
@@ -344,7 +473,7 @@ with tab1:
 # ╔══════════════════════════════════════════════════════════════════════════════
 with tab2:
     st.markdown("#### Faktor Finansial & Demografis terhadap Status Mahasiswa")
-    st.markdown("<p style='color:#94a3b8;font-size:0.84rem;margin-top:-8px;margin-bottom:20px'>Berdasarkan feature importance XGBoost — fitur finansial menempati 3 dari 5 posisi teratas</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color:{C_MUTED};font-size:0.84rem;margin-top:-8px;margin-bottom:20px'>Berdasarkan feature importance XGBoost — fitur finansial menempati 3 dari 5 posisi teratas</p>", unsafe_allow_html=True)
 
     def pct_bar(col_label):
         ct = (pd.crosstab(df[col_label], df["Status"], normalize="index") * 100
@@ -364,14 +493,14 @@ with tab2:
     r1c1, r1c2 = st.columns(2)
     with r1c1:
         st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
-        st.markdown("<div class='chart-title'>Pembayaran SPP vs Status <span style='font-size:0.72rem;color:#3b82f6;background:#eff6ff;padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #2</span></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='chart-title'>Pembayaran SPP vs Status <span style='font-size:0.72rem;color:{C_LIGHT};background:{C_APP};padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #2</span></div>", unsafe_allow_html=True)
         st.markdown("<div class='chart-subtitle'>Mahasiswa yang tidak membayar SPP tepat waktu memiliki risiko dropout jauh lebih tinggi</div>", unsafe_allow_html=True)
         st.plotly_chart(pct_bar("Tuition_label"), use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
     with r1c2:
         st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
-        st.markdown("<div class='chart-title'>Status Beasiswa vs Status <span style='font-size:0.72rem;color:#3b82f6;background:#eff6ff;padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #5</span></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='chart-title'>Status Beasiswa vs Status <span style='font-size:0.72rem;color:{C_LIGHT};background:{C_APP};padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #5</span></div>", unsafe_allow_html=True)
         st.markdown("<div class='chart-subtitle'>Penerima beasiswa memiliki tingkat kelulusan lebih tinggi dibanding non-penerima</div>", unsafe_allow_html=True)
         st.plotly_chart(pct_bar("Scholar_label"), use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
@@ -379,7 +508,7 @@ with tab2:
     r2c1, r2c2 = st.columns(2)
     with r2c1:
         st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
-        st.markdown("<div class='chart-title'>Status Hutang vs Status <span style='font-size:0.72rem;color:#3b82f6;background:#eff6ff;padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #6</span></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='chart-title'>Status Hutang vs Status <span style='font-size:0.72rem;color:{C_LIGHT};background:{C_APP};padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #6</span></div>", unsafe_allow_html=True)
         st.markdown("<div class='chart-subtitle'>Mahasiswa dengan hutang menunjukkan kecenderungan dropout yang lebih signifikan</div>", unsafe_allow_html=True)
         st.plotly_chart(pct_bar("Debtor_label"), use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
@@ -403,20 +532,22 @@ with tab2:
         category_orders={"Status": STATUS_ORDER},
         text=age_melt["Pct"].apply(lambda v: f"{v:.0f}%"),
     )
-    fig_age.update_traces(textposition="outside", textfont=dict(size=10))
+    fig_age.update_traces(textposition="outside", textfont=dict(size=10, color=DARK["text_muted"]))
     fig_age = tidy_fig(fig_age, height=310)
-    fig_age.update_layout(xaxis_title="Kelompok Usia saat Mendaftar",
-                          yaxis_title="Persentase (%)", yaxis_range=[0, 85])
+    fig_age.update_layout(
+        xaxis_title="Kelompok Usia saat Mendaftar",
+        yaxis_title="Persentase (%)", yaxis_range=[0, 85],
+    )
     st.plotly_chart(fig_age, use_container_width=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Hitung data dinamis Tab 2
-    dr_not_paid  = df[df["Tuition_fees_up_to_date"] == 0]["Status"].eq("Dropout").mean() * 100 if len(df[df["Tuition_fees_up_to_date"] == 0]) > 0 else 0
-    dr_paid      = df[df["Tuition_fees_up_to_date"] == 1]["Status"].eq("Dropout").mean() * 100 if len(df[df["Tuition_fees_up_to_date"] == 1]) > 0 else 0
-    dr_debtor    = df[df["Debtor"] == 1]["Status"].eq("Dropout").mean() * 100 if len(df[df["Debtor"] == 1]) > 0 else 0
-    dr_scholar   = df[df["Scholarship_holder"] == 1]["Status"].eq("Dropout").mean() * 100 if len(df[df["Scholarship_holder"] == 1]) > 0 else 0
-    dr_nonscholar= df[df["Scholarship_holder"] == 0]["Status"].eq("Dropout").mean() * 100 if len(df[df["Scholarship_holder"] == 0]) > 0 else 0
-    age_high_risk= df[df["Age_at_enrollment"] > 28]["Status"].eq("Dropout").mean() * 100 if len(df[df["Age_at_enrollment"] > 28]) > 0 else 0
+    dr_not_paid   = df[df["Tuition_fees_up_to_date"] == 0]["Status"].eq("Dropout").mean() * 100 if len(df[df["Tuition_fees_up_to_date"] == 0]) > 0 else 0
+    dr_paid       = df[df["Tuition_fees_up_to_date"] == 1]["Status"].eq("Dropout").mean() * 100 if len(df[df["Tuition_fees_up_to_date"] == 1]) > 0 else 0
+    dr_debtor     = df[df["Debtor"] == 1]["Status"].eq("Dropout").mean() * 100 if len(df[df["Debtor"] == 1]) > 0 else 0
+    dr_scholar    = df[df["Scholarship_holder"] == 1]["Status"].eq("Dropout").mean() * 100 if len(df[df["Scholarship_holder"] == 1]) > 0 else 0
+    dr_nonscholar = df[df["Scholarship_holder"] == 0]["Status"].eq("Dropout").mean() * 100 if len(df[df["Scholarship_holder"] == 0]) > 0 else 0
+    age_high_risk = df[df["Age_at_enrollment"] > 28]["Status"].eq("Dropout").mean() * 100 if len(df[df["Age_at_enrollment"] > 28]) > 0 else 0
+    filter_info   = f"{sel_gender} · {sel_course}" if (sel_gender != "Semua" or sel_course != "Semua") else "Semua Data"
     st.markdown(f"""
     <div class="insight-box">
         💡 <strong>Insight [{filter_info}]:</strong>
@@ -434,7 +565,7 @@ with tab2:
 # ╔══════════════════════════════════════════════════════════════════════════════
 with tab3:
     st.markdown("#### Performa Akademik & Tren Kurikuler")
-    st.markdown("<p style='color:#94a3b8;font-size:0.84rem;margin-top:-8px;margin-bottom:20px'>Fitur akademik mendominasi Top-1 feature importance — approval rate semester 2 adalah sinyal terkuat prediksi dropout</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color:{C_MUTED};font-size:0.84rem;margin-top:-8px;margin-bottom:20px'>Fitur akademik mendominasi Top-1 feature importance — approval rate semester 2 adalah sinyal terkuat prediksi dropout</p>", unsafe_allow_html=True)
 
     def box_chart(col, ylabel):
         data_list = []
@@ -444,7 +575,7 @@ with tab3:
                 y=vals, name=status,
                 marker_color=STATUS_COLOR[status],
                 line_color=STATUS_COLOR[status],
-                fillcolor=hex_to_rgba(STATUS_COLOR[status], 0.3),
+                fillcolor=hex_to_rgba(STATUS_COLOR[status], 0.25),
                 boxmean=True,
                 hovertemplate=f"<b>{status}</b><br>%{{y:.2f}}<extra></extra>",
             ))
@@ -456,14 +587,14 @@ with tab3:
     r1a, r1b = st.columns(2)
     with r1a:
         st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
-        st.markdown("<div class='chart-title'>Approval Rate Semester 1 <span style='font-size:0.72rem;color:#3b82f6;background:#eff6ff;padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #7</span></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='chart-title'>Approval Rate Semester 1 <span style='font-size:0.72rem;color:{C_LIGHT};background:{C_APP};padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #7</span></div>", unsafe_allow_html=True)
         st.markdown("<div class='chart-subtitle'>Rasio unit disetujui terhadap unit diambil — semester 1</div>", unsafe_allow_html=True)
         st.plotly_chart(box_chart("approval_rate_sem1", "Approval Rate"), use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
     with r1b:
         st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
-        st.markdown("<div class='chart-title'>Approval Rate Semester 2 <span style='font-size:0.72rem;color:#3b82f6;background:#eff6ff;padding:2px 8px;border-radius:20px;margin-left:6px'>&#127941; Fitur #1</span></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='chart-title'>Approval Rate Semester 2 <span style='font-size:0.72rem;color:#fbbf24;background:{C_APP};padding:2px 8px;border-radius:20px;margin-left:6px'>&#127941; Fitur #1</span></div>", unsafe_allow_html=True)
         st.markdown("<div class='chart-subtitle'>Fitur terpenting model — mahasiswa dropout hampir selalu memiliki approval rate mendekati 0</div>", unsafe_allow_html=True)
         st.plotly_chart(box_chart("approval_rate_sem2", "Approval Rate"), use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
@@ -471,14 +602,14 @@ with tab3:
     r2a, r2b = st.columns(2)
     with r2a:
         st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
-        st.markdown("<div class='chart-title'>Unit Disetujui Semester 1 <span style='font-size:0.72rem;color:#3b82f6;background:#eff6ff;padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #4</span></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='chart-title'>Unit Disetujui Semester 1 <span style='font-size:0.72rem;color:{C_LIGHT};background:{C_APP};padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #4</span></div>", unsafe_allow_html=True)
         st.markdown("<div class='chart-subtitle'>Jumlah mata kuliah yang berhasil lulus di semester 1</div>", unsafe_allow_html=True)
         st.plotly_chart(box_chart("Curricular_units_1st_sem_approved", "Jumlah Unit"), use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
     with r2b:
         st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
-        st.markdown("<div class='chart-title'>Unit Disetujui Semester 2 <span style='font-size:0.72rem;color:#3b82f6;background:#eff6ff;padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #3</span></div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='chart-title'>Unit Disetujui Semester 2 <span style='font-size:0.72rem;color:{C_LIGHT};background:{C_APP};padding:2px 8px;border-radius:20px;margin-left:6px'>&#11088; Fitur #3</span></div>", unsafe_allow_html=True)
         st.markdown("<div class='chart-subtitle'>Jumlah mata kuliah yang berhasil lulus di semester 2</div>", unsafe_allow_html=True)
         st.plotly_chart(box_chart("Curricular_units_2nd_sem_approved", "Jumlah Unit"), use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
@@ -497,8 +628,10 @@ with tab3:
                 hovertemplate=f"<b>{status}</b><br>Nilai: %{{x:.1f}}<br>Jumlah: %{{y}}<extra></extra>",
             ))
         fig_hist = tidy_fig(fig_hist, height=310)
-        fig_hist.update_layout(barmode="overlay",
-                               xaxis_title="Nilai Rata-rata (0-20)", yaxis_title="Frekuensi")
+        fig_hist.update_layout(
+            barmode="overlay",
+            xaxis_title="Nilai Rata-rata (0-20)", yaxis_title="Frekuensi",
+        )
         st.plotly_chart(fig_hist, use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -515,13 +648,14 @@ with tab3:
             opacity=0.55, category_orders={"Status": STATUS_ORDER},
         )
         fig_scatter = tidy_fig(fig_scatter, height=310)
-        fig_scatter.update_layout(xaxis_title="Nilai Semester 1 (0-20)",
-                                  yaxis_title="Nilai Semester 2 (0-20)")
+        fig_scatter.update_layout(
+            xaxis_title="Nilai Semester 1 (0-20)",
+            yaxis_title="Nilai Semester 2 (0-20)",
+        )
         fig_scatter.update_traces(marker=dict(size=5))
         st.plotly_chart(fig_scatter, use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # Hitung data dinamis Tab 3
     avg_ar2_dropout  = df[df["Status"] == "Dropout"]["approval_rate_sem2"].mean() if len(df[df["Status"] == "Dropout"]) > 0 else 0
     avg_ar2_graduate = df[df["Status"] == "Graduate"]["approval_rate_sem2"].mean() if len(df[df["Status"] == "Graduate"]) > 0 else 0
     avg_grade_drop   = df[df["Status"] == "Dropout"]["avg_grade_both_sem"].mean() if len(df[df["Status"] == "Dropout"]) > 0 else 0
@@ -544,13 +678,12 @@ with tab3:
 # ╔══════════════════════════════════════════════════════════════════════════════
 with tab4:
     st.markdown("#### 🚨 Early Warning — Monitoring Risiko Dropout Mahasiswa Aktif")
-    st.markdown("<p style='color:#94a3b8;font-size:0.84rem;margin-top:-8px;margin-bottom:20px'>Menggunakan model XGBoost untuk memprediksi probabilitas dropout mahasiswa berstatus Enrolled</p>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color:{C_MUTED};font-size:0.84rem;margin-top:-8px;margin-bottom:20px'>Menggunakan model XGBoost untuk memprediksi probabilitas dropout mahasiswa berstatus Enrolled</p>", unsafe_allow_html=True)
 
     if model_err:
         st.warning(f"Model tidak dapat dimuat: {model_err}. Pastikan folder `model/` tersedia.")
         st.stop()
 
-    # Ambil enrolled dengan filter
     enrolled_base = df_raw[df_raw["Status"] == "Enrolled"].copy()
     if sel_gender != "Semua":
         enrolled_base = enrolled_base[enrolled_base["Gender_label"] == sel_gender]
@@ -561,7 +694,6 @@ with tab4:
         st.info("Tidak ada mahasiswa berstatus Enrolled pada filter yang dipilih.")
         st.stop()
 
-    # Prediksi
     X_enroll = enrolled_base[feature_cols].copy()
     proba    = model.predict_proba(X_enroll)
     classes  = list(le.classes_)
@@ -570,18 +702,16 @@ with tab4:
     enrolled_base["Prob_Graduate"] = proba[:, classes.index("Graduate")]
     enrolled_base["Prob_Enrolled"] = proba[:, classes.index("Enrolled")]
 
-    # Threshold slider
     threshold = st.slider(
         "Threshold Risiko Tinggi (%)", 40, 80, 60, step=5,
         help="Mahasiswa dengan probabilitas dropout >= threshold dianggap berisiko tinggi"
     )
-    thr       = threshold / 100
-    n_high    = (enrolled_base["Prob_Dropout"] >= thr).sum()
-    n_mid     = ((enrolled_base["Prob_Dropout"] >= 0.4) & (enrolled_base["Prob_Dropout"] < thr)).sum()
-    n_low     = (enrolled_base["Prob_Dropout"] < 0.4).sum()
+    thr     = threshold / 100
+    n_high  = (enrolled_base["Prob_Dropout"] >= thr).sum()
+    n_mid   = ((enrolled_base["Prob_Dropout"] >= 0.4) & (enrolled_base["Prob_Dropout"] < thr)).sum()
+    n_low   = (enrolled_base["Prob_Dropout"] < 0.4).sum()
     total_enr = len(enrolled_base)
 
-    # Metric cards
     mc0, mc1, mc2, mc3 = st.columns(4)
     with mc0:
         st.markdown(f"""<div class="metric-card enrolled">
@@ -606,7 +736,6 @@ with tab4:
 
     st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
 
-    # Row: Histogram + Bar Jurusan
     ch1, ch2 = st.columns(2)
 
     with ch1:
@@ -620,18 +749,20 @@ with tab4:
             hovertemplate="Prob: %{x:.2f}<br>Jumlah: %{y}<extra></extra>",
         ))
         fig_hist_ew.add_vline(
-            x=thr, line_dash="dash", line_color=BLUE["darkest"], line_width=2,
+            x=thr, line_dash="dash", line_color=BLUE["light"], line_width=2,
             annotation_text=f"Threshold {threshold}%",
-            annotation_font=dict(color=BLUE["darkest"], size=11),
+            annotation_font=dict(color=BLUE["light"], size=11),
         )
         fig_hist_ew.add_vline(
-            x=0.4, line_dash="dot", line_color=BLUE["light"], line_width=1.5,
+            x=0.4, line_dash="dot", line_color=DARK["text_muted"], line_width=1.5,
             annotation_text="40%",
-            annotation_font=dict(color=BLUE["base"], size=10),
+            annotation_font=dict(color=DARK["text_muted"], size=10),
         )
         fig_hist_ew = tidy_fig(fig_hist_ew, height=300, legend=False)
-        fig_hist_ew.update_layout(xaxis_title="Probabilitas Dropout",
-                                  yaxis_title="Jumlah Mahasiswa")
+        fig_hist_ew.update_layout(
+            xaxis_title="Probabilitas Dropout",
+            yaxis_title="Jumlah Mahasiswa",
+        )
         st.plotly_chart(fig_hist_ew, use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
@@ -652,32 +783,32 @@ with tab4:
                 orientation="h",
                 marker=dict(
                     color=jurusan_risk["n_risiko"],
-                    colorscale=[[0, BLUE["lighter"]], [0.5, BLUE["base"]], [1, BLUE["darkest"]]],
+                    colorscale=[[0, BLUE["dark"]], [0.5, BLUE["base"]], [1, BLUE["light"]]],
                     showscale=False,
                 ),
                 text=jurusan_risk["n_risiko"], textposition="outside",
+                textfont=dict(color=DARK["text_primary"]),
                 hovertemplate="<b>%{y}</b><br>%{x} mahasiswa berisiko<extra></extra>",
             ))
             fig_jr = tidy_fig(fig_jr, height=300, legend=False)
             fig_jr.update_layout(
                 xaxis_title="Jumlah Mahasiswa Risiko Tinggi",
-                yaxis=dict(tickfont=dict(size=10)),
+                yaxis=dict(tickfont=dict(size=10, color=DARK["text_muted"])),
             )
             st.plotly_chart(fig_jr, use_container_width=True)
         else:
             st.info("Tidak ada mahasiswa risiko tinggi pada threshold ini.")
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # Scatter: Approval Rate Sem2 vs Prob Dropout
     st.markdown("<div class='chart-card'>", unsafe_allow_html=True)
-    st.markdown("<div class='chart-title'>Approval Rate Sem 2 vs Probabilitas Dropout <span style='font-size:0.72rem;color:#3b82f6;background:#eff6ff;padding:2px 8px;border-radius:20px;margin-left:6px'>&#127941; Fitur #1</span></div>", unsafe_allow_html=True)
+    st.markdown(f"<div class='chart-title'>Approval Rate Sem 2 vs Probabilitas Dropout <span style='font-size:0.72rem;color:#fbbf24;background:{C_APP};padding:2px 8px;border-radius:20px;margin-left:6px'>&#127941; Fitur #1</span></div>", unsafe_allow_html=True)
     st.markdown("<div class='chart-subtitle'>Semakin rendah approval rate semester 2, semakin tinggi probabilitas dropout — korelasi langsung fitur terpenting model</div>", unsafe_allow_html=True)
 
     enrolled_plot = enrolled_base.copy()
     enrolled_plot["Risiko"] = enrolled_plot["Prob_Dropout"].apply(
         lambda p: "Tinggi" if p >= thr else ("Sedang" if p >= 0.4 else "Rendah")
     )
-    risk_color_map = {"Tinggi": BLUE["darkest"], "Sedang": BLUE["base"], "Rendah": BLUE["light"]}
+    risk_color_map = {"Tinggi": "#f87171", "Sedang": BLUE["base"], "Rendah": BLUE["light"]}
 
     fig_sc = px.scatter(
         enrolled_plot.sample(min(800, len(enrolled_plot)), random_state=42),
@@ -688,9 +819,9 @@ with tab4:
         hover_data={"Course_name": True, "approval_rate_sem1": ":.2f", "Prob_Dropout": ":.2f"},
     )
     fig_sc.add_hline(
-        y=thr, line_dash="dash", line_color=BLUE["darkest"], line_width=1.5,
+        y=thr, line_dash="dash", line_color=BLUE["light"], line_width=1.5,
         annotation_text=f"Threshold {threshold}%",
-        annotation_font=dict(color=BLUE["darkest"], size=11),
+        annotation_font=dict(color=BLUE["light"], size=11),
     )
     fig_sc = tidy_fig(fig_sc, height=340)
     fig_sc.update_layout(
@@ -701,7 +832,6 @@ with tab4:
     st.plotly_chart(fig_sc, use_container_width=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
-    # Tabel risiko
     st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
     st.markdown("#### Daftar Mahasiswa Berisiko")
 
@@ -742,13 +872,11 @@ with tab4:
         if col in tabel.columns:
             tabel[col] = tabel[col].map({1: "Ya", 0: "Tidak"})
 
-    # Badge kolom risiko
     tabel.insert(0, "Risiko", [
         "🔴 Tinggi" if p >= thr else ("🟡 Sedang" if p >= 0.4 else "🟢 Rendah")
         for p in prob_raw
     ])
 
-    # Filter
     if filter_opt == label_tinggi:
         mask = prob_raw >= thr
     elif filter_opt == label_sedang:
@@ -762,9 +890,9 @@ with tab4:
     def highlight_risk(row):
         p = float(row["P(Dropout)"].replace("%", "")) / 100
         if p >= thr:
-            return ["background-color:#fee2e2; font-weight:600"] * len(row)
+            return ["background-color:#3d1515; color:#fca5a5; font-weight:600"] * len(row)
         elif p >= 0.4:
-            return [f"background-color:{BLUE['lightest']}"] * len(row)
+            return ["background-color:#1a2744; color:#93c5fd"] * len(row)
         return [""] * len(row)
 
     st.dataframe(
@@ -774,7 +902,7 @@ with tab4:
 
     csv = tabel_show.to_csv(index=False).encode("utf-8")
     st.download_button(
-        label="Download Daftar Risiko (.csv)",
+        label="⬇️ Download Daftar Risiko (.csv)",
         data=csv, file_name="mahasiswa_berisiko_dropout.csv", mime="text/csv",
     )
 
@@ -782,7 +910,7 @@ with tab4:
     course_counts   = high_risk.groupby("Course_name").size() if len(high_risk) > 0 else pd.Series()
     max_val         = course_counts.max() if len(course_counts) > 0 else 0
     top_risk_course = ", ".join(course_counts[course_counts == max_val].index.tolist()) if len(course_counts) > 0 else "-"
-    avg_prob_high = enrolled_base[enrolled_base["Prob_Dropout"] >= thr]["Prob_Dropout"].mean() * 100 if n_high > 0 else 0
+    avg_prob_high   = enrolled_base[enrolled_base["Prob_Dropout"] >= thr]["Prob_Dropout"].mean() * 100 if n_high > 0 else 0
     st.markdown(f"""
     <div class="insight-box">
         💡 <strong>Early Warning [{filter_info}]:</strong>
@@ -797,8 +925,8 @@ with tab4:
 
 # ── Footer ────────────────────────────────────────────────────────────────────
 st.markdown("<div class='section-divider'></div>", unsafe_allow_html=True)
-st.markdown("""
-<div style='text-align:center;color:#94a3b8;font-size:0.78rem;padding:12px 0 24px'>
+st.markdown(f"""
+<div style='text-align:center;color:{DARK["text_muted"]};font-size:0.78rem;padding:12px 0 24px'>
     Jaya Jaya Institut · Student Performance Dashboard · Model: XGBoost (F1: 0.7608) · Data: 4,424 mahasiswa
 </div>
 """, unsafe_allow_html=True)
